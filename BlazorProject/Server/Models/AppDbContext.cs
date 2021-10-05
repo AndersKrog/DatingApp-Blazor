@@ -15,9 +15,6 @@ namespace BlazorProject.Server.Models
            
         }
 
-        //public DbSet<Employee> Employees { get; set; }
-        //public DbSet<Department> Departments { get; set; }
-
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Message> Messages { get; set; }
@@ -25,6 +22,12 @@ namespace BlazorProject.Server.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Message>().HasKey(e => new {e.MessageId, e.FromId, e.ToId });
+
+            modelBuilder.Entity<Message>().HasOne(e => e.ProfileFrom).WithMany(e => e.MessageTo).HasForeignKey(e => e.FromId);
+
+            modelBuilder.Entity<Message>().HasOne(e => e.ProfileTo).WithMany(e => e.MessageFrom).HasForeignKey(e => e.ToId);
 
             // Seed Account Table
             modelBuilder.Entity<Account>().HasData(new Account
@@ -69,19 +72,19 @@ namespace BlazorProject.Server.Models
 
             modelBuilder.Entity<Message>().HasData(new Message
             {
-                MessageId = 1,
                 MessageText = "Hej med dig, hvad laver du her?",
-                Sender = 1,
-                Receiver = 2,
+                MessageId = 1,
+                FromId = 1,
+                ToId = 2,
                 TimeStamp = (new DateTime(1999, 10, 5))
             }) ;
 
             modelBuilder.Entity<Message>().HasData(new Message
             {
-                MessageId = 2,
                 MessageText = "Det samme som dig?",
-                Sender = 2,
-                Receiver = 1,
+                MessageId = 2,
+                FromId = 2,
+                ToId = 1,
                 TimeStamp = (new DateTime(1999, 10, 6))
             });
         }

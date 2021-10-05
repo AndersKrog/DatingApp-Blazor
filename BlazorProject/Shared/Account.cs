@@ -18,27 +18,4 @@ namespace BlazorProject.Shared
 
         public Profile profile { get; set; }
     }
-
-    public class Profile 
-    {
-        public int ProfileId { get; set; }
-        [Required]
-        public string Alias { get; set; }
-        public int Postal { get; set; }
-        public Gender Gender { get; set; }
-        public DateTime BirthDate { get; set; }
-        public string PhotoPath { get; set; }
-        public int AccountId { get; set; } // foreign key
-
-        public List<Message> Messages { get; set; }
-    }
-
-    public class Message
-    { 
-        public int MessageId { get; set; } 
-        public string MessageText { get; set; }
-        public int Sender { get; set; }         // foreign key
-        public int Receiver { get; set; }       // foreign key
-        public DateTime TimeStamp { get; set; }
-    }
 }

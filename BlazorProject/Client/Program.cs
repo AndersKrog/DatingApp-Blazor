@@ -14,7 +14,7 @@ namespace BlazorProject.Client
     public class Program
     {
         public static async Task Main(string[] args)
-        {
+        {                
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDkwODc0QDMxMzkyZTMyMmUzMEIxWFdvaVE4UGRiS3pkeUMraVlUejc4aXFqZXAzZjcvYjhYMiszdU5iRms9");
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
